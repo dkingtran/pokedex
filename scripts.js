@@ -3,24 +3,24 @@ let offset = 0;
 const limit = 20;
 
 const typeColors = {
-  normal: "hsl(120, 0%, 64%)",
-  fire: "hsl(17, 100%, 49%)",
-  water: "hsl(212, 100.00%, 61.80%)",
-  electric: "hsl(36, 95.00%, 46.70%)",
-  grass: "hsl(119, 54.90%, 56.80%)",
-  ice: "hsl(201, 96.50%, 55.30%)",
-  fighting: "hsl(3, 66%, 45%)",
-  poison: "hsl(168, 87.90%, 42.00%)",
-  ground: "hsl(21, 38%, 42%)",
-  flying: "hsl(199, 76%, 75%)",
-  psychic: "hsl(279, 88%, 65%)",
-  bug: "hsl(81, 79.70%, 61.40%)",
-  rock: "hsl(266, 4.20%, 32.70%)",
-  ghost: "hsl(242, 100%, 93%)",
-  dragon: "hsl(0, 100.00%, 50.00%)",
-  dark: "hsl(24, 20.00%, 9.80%)",
-  steel: "hsl(214, 25%, 36%)",
-  fairy: "hsl(298, 65%, 70%)",
+  normal: "#a3a3a3",  
+  fire: "#ff4700",     
+  water: "#3a9eff",       
+  electric: "#f7bf12",  
+  grass: "#68b354",       
+  ice: "#6dc0fa",         
+  fighting: "#bb3b25",
+  poison: "#0bb9a0",     
+  ground: "#7a6245",  
+  flying: "#8ac7f5",   
+  psychic: "#bf41ff",  
+  bug: "#b7e75d",         
+  rock: "#544e4e",        
+  ghost: "#f5e9ff",     
+  dragon: "#636EBF",  
+  dark: "#3f3127",     
+  steel: "#4a5b75",    
+  fairy: "#d37eff",    
 };
 
 function getTypeIconURL(type) {
@@ -58,20 +58,28 @@ function filterAndShowNames() {
 
   const filtered = filterPokemonsByName(searchValue);
   if (filtered.length === 0) {
-    content.innerHTML = "<p> No Pokemon found.</p>";
+    content.innerHTML = '<p class="not-found-alert" id="not-found-msg">No Pokémon found.</p>';
+
+    setTimeout(() => {
+      const msg = document.getElementById('not-found-msg');
+      if (msg) msg.remove(); 
+    }, 4000);
     return;
   }
   renderFilteredPokemons(filtered, content);
   renderCards();
 }
 
+
 function getSearchInput() {
   return document.getElementById("search_bar").value.toLowerCase();
 }
 
+
 function filterPokemonsByName(query) {
   return allPokemons.filter((p) => p.name.toLowerCase().includes(query));
 }
+
 
 function renderFilteredPokemons(pokemons, container) {
   pokemons.forEach((pokemon) => {
@@ -79,8 +87,6 @@ function renderFilteredPokemons(pokemons, container) {
     container.innerHTML += renderOutsideCard(i);
   });
 }
-
-
 
 
 function renderCards() {
@@ -91,6 +97,7 @@ function renderCards() {
   renderOverlayCards();
 }
 
+
 function renderOverlayCards() {
   let OverlayCard = document.getElementById("overlay");
   for (let i = 0; i < allPokemons.length; i++) {
@@ -98,10 +105,12 @@ function renderOverlayCards() {
   }
 }
 
+
 function getPokemonBgColor(pokemon) {
   const mainType = pokemon.types[0];
   return typeColors[mainType] || "#DDD";
 }
+
 
 function getTypeIconsHTML(types) {
   return types
@@ -111,6 +120,7 @@ function getTypeIconsHTML(types) {
     })
     .join("");
 }
+
 
 function getStatBarsHTML(stats) {
   return `
@@ -123,6 +133,7 @@ function getStatBarsHTML(stats) {
     `;
 }
 
+
 function renderOutsideCard(i) {
   const pokemon = allPokemons[i];
   const bgColor = getPokemonBgColor(pokemon);
@@ -130,12 +141,14 @@ function renderOutsideCard(i) {
   return getOutsideCardTemplate(i, pokemon, bgColor, typeIconsHTML);
 }
 
+
 function renderOverlayMain(i) {
   const pokemon = allPokemons[i];
   const bgColor = getPokemonBgColor(pokemon);
   const typeIconsHTML = getTypeIconsHTML(pokemon.types);
   return getOverlayTemplate(i, pokemon, bgColor, typeIconsHTML);
 }
+
 
 function renderOverlayStats(i) {
   const pokemon = allPokemons[i];
@@ -151,12 +164,14 @@ function renderOverlayStats(i) {
   );
 }
 
+
 function renderOverlayEvoChain(i) {
   const pokemon = allPokemons[i];
   const bgColor = getPokemonBgColor(pokemon);
   const typeIconsHTML = getTypeIconsHTML(pokemon.types);
   return getOverlayEvoChainTemplate(i, pokemon, bgColor, typeIconsHTML);
 }
+
 
 async function fetchPokemonData() {
   try {
@@ -167,6 +182,7 @@ async function fetchPokemonData() {
   }
 }
 
+
 async function fetchPokemonList(offset, limit) {
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
@@ -174,6 +190,7 @@ async function fetchPokemonList(offset, limit) {
   const data = await response.json();
   return data.results;
 }
+
 
 async function fetchFullPokemonDetails(pokemonResults) {
   return await Promise.all(
@@ -197,10 +214,12 @@ async function fetchFullPokemonDetails(pokemonResults) {
   );
 }
 
+
 function getStatBar(statName, statValue) {
   const percentage = Math.min(statValue, 100);
   return getStatBarTemplate(statName, percentage);
 }
+
 
 async function getEvolutionChain(pokemonName) {
   try {
@@ -213,6 +232,7 @@ async function getEvolutionChain(pokemonName) {
   }
 }
 
+
 async function fetchSpeciesData(pokemonName) {
   const speciesRes = await fetch(
     `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`
@@ -220,30 +240,32 @@ async function fetchSpeciesData(pokemonName) {
   return await speciesRes.json();
 }
 
+
 async function fetchEvolutionData(url) {
   const evoRes = await fetch(url);
   return await evoRes.json();
 }
 
+
 async function extractEvolutionChain(chainRoot) {
   const chain = [];
-  let current = chainRoot;
 
-  while (current) {
+  for (let current = chainRoot; current; current = current.evolves_to[0]) {
     const name = current.species.name;
     const imgData = await fetchPokemonImage(name);
     chain.push({ name: name, image: imgData });
-    current = current.evolves_to[0];
   }
 
   return chain;
 }
+
 
 async function fetchPokemonImage(name) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const data = await res.json();
   return data.sprites.other.home.front_default;
 }
+
 
 function renderEvoChain(container, evoChain) {
   if (!evoChain.length) {
@@ -262,9 +284,11 @@ function renderEvoChain(container, evoChain) {
   container.innerHTML = html;
 }
 
+
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 function overlay(i) {
   let overlayRef = document.getElementById("overlay");
@@ -273,9 +297,11 @@ function overlay(i) {
   overlayRef.classList.toggle("d_none");
 }
 
+
 function dialogPrevention(event) {
   event.stopPropagation();
 }
+
 
 function toggleOff() {
   let overlayRef = document.getElementById("overlay");
@@ -288,10 +314,12 @@ async function loadAndRenderMain(i) {
   overlayRef.innerHTML = renderOverlayMain(i);
 }
 
+
 async function loadAndRenderStats(i) {
   const overlayRef = document.getElementById("overlay");
   overlayRef.innerHTML = renderOverlayStats(i);
 }
+
 
 async function loadAndRenderEvoChain(i) {
   const pokemon = allPokemons[i];
@@ -309,6 +337,7 @@ async function switchToMainSection(i) {
   }, 0);
 }
 
+
 async function switchToStatsSection(i) {
   toggleOverlaySpinner(true);
   setTimeout(async () => {
@@ -316,6 +345,7 @@ async function switchToStatsSection(i) {
     toggleOverlaySpinner(false);
   }, 0);
 }
+
 
 async function switchToEvoChainSection(i) {
   let overlayRef = document.getElementById("overlay");
@@ -328,6 +358,7 @@ async function switchToEvoChainSection(i) {
   }, 200);
 }
 
+
 function toggleSpinner(show) {
   const spinner = document.getElementById("spinner");
   if (show) {
@@ -336,6 +367,7 @@ function toggleSpinner(show) {
     spinner.classList.add("hidden");
   }
 }
+
 
 function toggleOverlaySpinner(show) {
   const overlaySpinner = document.getElementById("overlay_spinner");
@@ -348,6 +380,7 @@ function toggleOverlaySpinner(show) {
   }
 }
 
+
 function arrowRight(i) {
   if (i < allPokemons.length - 1) {
     i++;
@@ -356,6 +389,7 @@ function arrowRight(i) {
   }
   switchCardOverlay(i);
 }
+
 
 function arrowLeft(i) {
   if (i > 0) {
@@ -366,12 +400,14 @@ function arrowLeft(i) {
   switchCardOverlay(i);
 }
 
+
 function switchCardOverlay(i) {
   let overlayRef = document.getElementById("overlay");
 
   overlayRef.innerHTML = "";
   overlayRef.innerHTML = renderOverlayMain(i);
 }
+
 
 async function loadMorePokemons() {
   toggleSpinner(true);
@@ -382,6 +418,7 @@ async function loadMorePokemons() {
   renderNewCards(newPokemons);
   toggleSpinner(false);
 }
+
 
 function renderNewCards(pokemonList) {
   const content = document.getElementById("content");

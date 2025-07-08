@@ -14,6 +14,7 @@
 .main-infos {
     display: flex;
     padding: 25px;
+    margin-top: 48px;
 }
 
 .main-infos-divs {
@@ -23,7 +24,7 @@
 }
 
 .main-infos-span {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .main-section {

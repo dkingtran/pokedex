@@ -7,7 +7,7 @@
 
 .Evo-Chain-infos {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     min-height: 90%;
     position: relative;
@@ -22,8 +22,10 @@
     height: 85px;
 }
 
+
 .evo-chain-section {
     width: 33%;
     display: flex;
     justify-content: center;
+    text-align: center;
 }

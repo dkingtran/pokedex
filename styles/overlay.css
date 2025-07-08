@@ -13,8 +13,8 @@
 }
 
 .overlay-template {
-    height: 440px;
-    width: 320px;
+    height: 600px;
+    width: 400px;
     background-color: hsl(180, 5%, 13%);
     color: hsl(0, 0%, 25%);
     border-radius: 8px;
