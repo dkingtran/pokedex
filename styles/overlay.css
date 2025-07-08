@@ -1,0 +1,38 @@
+.d_none {
+    display: none;
+}
+
+.overlay {
+    min-height: 100vh;
+    min-width: 100%;
+    background-color: hsla(0, 0%, 24%, 0.544);
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.overlay-template {
+    height: 440px;
+    width: 320px;
+    background-color: hsl(180, 5%, 13%);
+    color: hsl(0, 0%, 25%);
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: hsl(0, 0%, 30%);
+    cursor: default !important;
+    display: flex;
+    flex-direction: column;
+    margin: 12px;
+}
+
+.overlay-template-position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+.overlay-template-main {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-info-value {
+    margin-left: 15px;
+
+}
+
+.main-infos {
+    display: flex;
+    padding: 25px;
+}
+
+.main-infos-divs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.main-infos-span {
+    font-size: 1.2rem;
+}
+
+.main-section {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}

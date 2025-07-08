@@ -1,0 +1,29 @@
+.evo-chain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Evo-Chain-infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90%;
+    position: relative;
+}
+
+.evo-chain-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.evo-img {
+    height: 85px;
+}
+
+.evo-chain-section {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}

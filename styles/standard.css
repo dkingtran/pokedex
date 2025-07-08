@@ -1,0 +1,19 @@
+a {
+    text-decoration: none;
+}
+
+.body {
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: "Press Start 2P";
+    font-size: 0.6rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

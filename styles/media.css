@@ -1,0 +1,228 @@
+@media(max-width: 700px) {
+
+    
+    .card-outside {
+        height: 200px;
+        width: 150px;
+        margin: 8px;
+    }
+
+    .card-header {
+        height: 35px;
+    }
+
+    .outside-card-main {
+        height: calc(100% - 75px);
+    }
+
+    .pokemon-img {
+        height: 120px;
+    }
+
+    .card-footer {
+        height: 40px;
+    }
+
+    .pokemon-name {
+        font-size: 0.9rem;
+    }
+
+    #pokemon_id {
+        font-size: 0.9rem;
+    }
+
+    .type-icon {
+        width: 20px;
+        height: 20px;
+        margin: 2px;
+    }
+}
+
+@media(max-width: 600px) {
+    .main {
+        min-height: calc(100vh - 160px);
+    }
+
+    .header {
+        height: auto;
+    }
+
+    .footer {
+        height: 70px;
+    }
+
+    .logo-icon {
+        height: 40px;
+    }
+
+    .logo-icon-bottom {
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+    .spinner img {
+        width: 60px;
+    }
+
+    .load-more-btn {
+        font-size: 1rem;
+    }
+
+
+    .logo-text {
+        font-size: 2rem;
+    }
+
+
+    .card-outside {
+        height: 180px;
+        width: 140px;
+        margin: 5px;
+    }
+
+    .evo-pokemon-name {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+@media(max-width: 500px) {
+
+    .header-content {
+        display: flex;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column;
+        gap: 8px;
+        height: auto;
+    }
+
+    .overlay-template {
+        height: 450px !important;
+        width: 300px;
+    }
+
+
+    .pokemon-name {
+        font-size: 0.9rem;
+    }
+
+    #pokemon_id {
+        font-size: 0.9rem;
+    }
+
+    .load-more-btn {
+        padding: 3px 6px;
+    }
+
+    .card-outside {
+        height: 150px;
+        width: 120px;
+        margin: 6px;
+    }
+
+    .card-header {
+        height: 30px;
+    }
+
+    .outside-card-main {
+        height: calc(100% - 60px);
+    }
+
+    .pokemon-img {
+        height: 100px;
+    }
+
+    .card-footer {
+        height: 30px;
+    }
+
+    .type-icon {
+        width: 18px;
+        height: 18px;
+        margin: 2px;
+    }
+}
+
+
+
+@media(max-width: 410px) {
+    .header-content {
+        display: flex;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column;
+        gap: 5px;
+        height: auto;
+    }
+
+    .logo-icon {
+        height: 40px;
+        margin-left: 0px;
+
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    input {
+        font-size: 1.5rem;
+    }
+
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+        height: auto;
+    }
+
+    .spinner img {
+        width: 40px;
+    }
+
+    .overlay-template {
+        height: 350px !important;
+        width: 240px;
+    }
+
+    .stats-bar-and-label {
+        display: flex;
+        justify-content: center;
+        margin-left: -20px;
+        margin-top: -8px;
+    }
+
+    .stats-list {
+        font-size: 0.9rem;
+    }
+
+    .main-infos-divs {
+        gap: 5px !important;
+
+    }
+
+    .main-infos {
+        padding: 20px !important;
+    }
+
+    .main-infos-span {
+        font-size: 0.9rem !important;
+    }
+
+    .evo-img {
+        height: 70px !important;
+    }
+
+    .evo-pokemon-name {
+        font-size: 0.7rem;
+    }
+}

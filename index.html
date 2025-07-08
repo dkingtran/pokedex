@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Pokedex</title>
+    <link rel="icon" href="./assets/img/logo/pokeball.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/cards.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/logo/pokeball.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="styles/overlay.css" />
+    <link rel="stylesheet" href="styles/overlay-of-cards.css" />
+    <link rel="stylesheet" href="styles/media.css" />
+    <link rel="stylesheet" href="styles/main-body.css" />
+    <link rel="stylesheet" href="styles/stats.css" />
+    <link rel="stylesheet" href="styles/evo-chain.css" />
+    <link rel="stylesheet" href="styles/loadingspinner.css" />
+
+    <script src="scripts.js"></script>
+    <script src="./scripts/template.js"></script>
+  </head>
+  <body class="body" onload="init()">
+    <div id="spinner" class="spinner hidden">
+      <img src="./assets/img/logo/pokeball.png" alt="Loading..." />
+    </div>
+
+    <div onclick="toggleOff()" id="overlay" class="d_none overlay"></div>
+
+    <header class="header">
+      <div class="header-content">
+        <a href="index.html">
+          <div class="logo">
+            <img
+              class="logo-icon"
+              src="./assets/img/logo/pokeball.png"
+              alt=""
+            />
+            <span class="logo-text">Pokedex</span>
+          </div>
+        </a>
+
+        <div class="input-div">
+          <input
+            type="search"
+            placeholder="search Pokemon..."
+            id="search_bar"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="content"></div>
+      <div class="show-more-btn" id="load-more-container">
+        <button onclick="loadMorePokemons()" class="load-more-btn">
+          show more
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <a href="index.html">
+          <div class="logo">
+            <img
+              class="logo-icon-bottom"
+              src="./assets/img/logo/pokeball.png"
+              alt=""
+            />
+            <span class="logo-text">Pokedex</span>
+          </div>
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>

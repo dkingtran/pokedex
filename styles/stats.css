@@ -1,0 +1,54 @@
+.stats-section {
+    border-left: 2px solid hsl(0, 0%, 30%);
+    border-right: 2px solid hsl(0, 0%, 30%);
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+
+.stats-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+
+}
+
+.stats-bar-and-label {
+    padding-bottom: 5px;
+}
+
+.stats-list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    max-width: 75%;
+    position: relative;
+}
+
+.stat-bar-row {
+    display: flex;
+    align-items: center;
+    margin: 1px 0;
+}
+
+.stat-label {
+    width: 250px;
+    text-transform: capitalize;
+}
+
+.stat-bar-bg {
+    background-color: #ffffff;
+    width: 90%;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.stat-bar-fill {
+    background-color: hsl(0, 0%, 30%);
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
