@@ -41,8 +41,10 @@ function debounce(func, delay) {
 function filterAndShowNames() {
   const searchValue = getSearchInput();
   const content = document.getElementById("content");
-  if (searchValue.length < 3) return renderCards();
   content.innerHTML = "";
+
+  if (searchValue.length < 3) return renderCards();
+
   const filtered = filterPokemonsByName(searchValue);
   filtered.length === 0
     ? (
@@ -52,7 +54,7 @@ function filterAndShowNames() {
           if (msg) msg.remove();
         }, 4000)
       )
-    : (renderFilteredPokemons(filtered, content), renderCards());
+    : renderFilteredPokemons(filtered, content);
 }
 
 
@@ -76,6 +78,7 @@ function renderFilteredPokemons(pokemons, container) {
 
 function renderCards() {
   let outsideCard = document.getElementById("content");
+  outsideCard.innerHTML = ""; // Kartenbereich immer leeren
   for (let i = 0; i < allPokemons.length; i++) {
     outsideCard.innerHTML += renderOutsideCard(i);
   }
