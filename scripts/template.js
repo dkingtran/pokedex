@@ -1,7 +1,7 @@
 function getOutsideCardTemplate(i, pokemon, bgColor, typeIconsHTML) {
   return /*html*/ `
   <div class="outside-card-position">
-      <div onclick="overlay(${i})" class="card-outside" style="background-color: ${bgColor};">
+      <div onclick="overlay(${i})" class="card-outside ${bgColor}">
           <header class="card-header">
               <span id="pokemon_id">#${i + 1}</span>
               <span class="pokemon-name" id="pokemon_name">${pokemon.name}</span>
@@ -23,7 +23,7 @@ function getOutsideCardTemplate(i, pokemon, bgColor, typeIconsHTML) {
 function getOverlayTemplate(i, pokemon, bgColor, typeIconsHTML) {
   return /*html*/ `
       <div class="overlay-template-position">
-          <div class="overlay-template" onclick="dialogPrevention(event)" style="background-color: ${bgColor};">
+          <div class="overlay-template ${bgColor}" onclick="dialogPrevention(event)">
               <header class="overlay-template-header">
                   <span id="pokemon_id">#${i + 1}</span>
                   <span class="pokemon-name-overlay" id="pokemon_name">${pokemon.name}</span>
@@ -73,7 +73,7 @@ function getOverlayTemplate(i, pokemon, bgColor, typeIconsHTML) {
 function getOverlayStatsTemplate(i, pokemon, bgColor, typeIconsHTML, statBarsHTML) {
   return /*html*/ `
   <div class="overlay-template-position">
-      <div class="overlay-template" onclick="dialogPrevention(event)" style="background-color: ${bgColor};">
+      <div class="overlay-template ${bgColor}" onclick="dialogPrevention(event)">
           <header class="overlay-template-header">
               <span id="pokemon_id">#${i + 1}</span>
               <span class="pokemon-name-overlay" id="pokemon_name">${pokemon.name}</span>
@@ -116,7 +116,7 @@ function getOverlayStatsTemplate(i, pokemon, bgColor, typeIconsHTML, statBarsHTM
 function getOverlayEvoChainTemplate(i, pokemon, bgColor, typeIconsHTML) {
   return /*html*/ `
   <div class="overlay-template-position">
-      <div class="overlay-template" onclick="dialogPrevention(event)" style="background-color: ${bgColor};">
+      <div class="overlay-template ${bgColor}" onclick="dialogPrevention(event)">
           <header class="overlay-template-header">
               <span id="pokemon_id">#${i + 1}</span>
               <span class="pokemon-name-overlay" id="pokemon_name">${pokemon.name}</span>
@@ -172,4 +172,24 @@ return `
           ${arrow}
       `;
 }
+
+function getEvoChainWithNavTemplate(evoChain, currentIndex, i) {
+
+    const leftDisabled = currentIndex === 0 ? 'disabled' : '';
+    const rightDisabled = currentIndex === evoChain.length - 1 ? 'disabled' : '';
+
+    return `
+        <div class="evo-chain-nav-btn-container">
+            <button class="evo-chain-nav-btn" onclick="showPrevEvo(${i})" ${leftDisabled}>&#10094;</button>
+        </div>
+        <div class="evo-chain" style="align-items:center;">
+            <img class="evo-img" src="${evoChain[currentIndex].image}" alt="${evoChain[currentIndex].name}">
+            <span class="evo-pokemon-name">${capitalize(evoChain[currentIndex].name)}</span>
+        </div>
+        <div class="evo-chain-nav-btn-container">
+            <button class="evo-chain-nav-btn" onclick="showNextEvo(${i})" ${rightDisabled}>&#10095;</button>
+        </div>
+    `;
+}
+
 

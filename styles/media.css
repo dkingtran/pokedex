@@ -11,11 +11,6 @@
         margin-top: 16px;
     }
 
-    .card-outside {
-        height: 200px;
-        width: 150px;
-        margin: 8px;
-    }
 
     .card-header {
         height: 35px;
@@ -31,11 +26,15 @@
     }
 
     .pokemon-name {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
     }
 
     #pokemon_id {
         font-size: 1.1rem;
+    }
+
+    .evo-pokemon-name {
+        font-size: 1.2rem;
     }
 
 
@@ -77,14 +76,12 @@
     }
 
 
-    .card-outside {
-        height: 180px;
-        width: 140px;
-        margin: 8px;
+    .evo-pokemon-name {
+        font-size: 1.2rem;
     }
 
-    .evo-pokemon-name {
-        font-size: 0.9rem;
+    .pokemon-name {
+        font-size: 1.5rem;
     }
 
     .pokemon-img {
@@ -110,6 +107,12 @@
 
 @media(max-width: 500px) {
 
+    .card-outside {
+        height: 240px;
+        width: 180px;
+        margin: 8px;
+    }
+
     .header-content {
         display: flex;
         align-items: center !important;
@@ -120,13 +123,13 @@
     }
 
     .overlay-template {
-        height: 450px !important;
-        width: 300px;
+        height: 500px !important;
+        width: 360px;
     }
 
     .info-sections {
         font-weight: 600;
-        font-size: 1rem;   
+        font-size: 1.2rem;   
     }
 
     .stats-info-container {
@@ -139,16 +142,19 @@
     }
 
     .main-infos-span {
-        font-size: 1.1rem !important;
+        font-size: 1.3rem !important;
     }
 
-
     .pokemon-name {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     #pokemon_id {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
+    }
+
+    .evo-pokemon-name {
+        font-size: 1.2rem;
     }
 
     .x {
@@ -165,18 +171,13 @@
         font-size: 1.3rem;
     }
 
-    .card-outside {
-        height: 150px;
-        width: 120px;
-        margin: 8px;
-    }
 
     .card-header {
         height: 30px;
     }
 
     .stats-list {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .outside-card-main {
@@ -249,8 +250,8 @@
     }
 
     .overlay-template {
-        height: 350px !important;
-        width: 240px;
+        height: 450px !important;
+        width: 300px;
     }
 
     .stats-bar-and-label {
@@ -261,7 +262,7 @@
     }
 
     .stats-list {
-        font-size: 0.9rem;
+        font-size: 1.3rem;
     }
 
     .main-infos-divs {
@@ -274,15 +275,15 @@
     }
 
     .main-infos-span {
-        font-size: 0.9rem !important;
+        font-size: 1.2rem !important;
     }
 
     .evo-img {
-        height: 70px !important;
+        height: 100px !important;
     }
 
     .evo-pokemon-name {
-        font-size: 0.7rem;
+        font-size: 1.3rem;
     }
 
     .type-switch-row {
@@ -298,5 +299,41 @@
 
     .type-icons-center {
         gap: 1px;
+    }
+
+    .evo-chain-nav-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #444;
+        cursor: pointer;
+        padding: 0 8px;
+        transition: color 0.2s;
+    }
+    .evo-chain-nav-btn:disabled {
+        color: #bbb;
+        cursor: default;
+    }
+    .evo-chain-nav-btn-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-right: 4px;
+    }
+    .Evo-Chain-infos {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media(max-width: 350px) {
+
+    .overlay-template{
+        margin: 8px;
     }
 }

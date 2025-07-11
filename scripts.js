@@ -2,27 +2,17 @@ let allPokemons = [];
 let offset = 0;
 const limit = 20;
 
-const typeColors = {
-  bug: "#b7e75d",
-  dark: "#3f3127",
-  dragon: "#636EBF",
-  electric: "#f7bf12",
-  fairy: "#d37eff",
-  fighting: "#bb3b25",
-  fire: "#ff4700",
-  flying: "#8ac7f5",
-  ghost: "#f5e9ff",
-  grass: "#68b354",
-  ground: "#7a6245",
-  ice: "#6dc0fa",
-  normal: "#a3a3a3",
-  poison: "#0bb9a0",
-  psychic: "#bf41ff",
-  rock: "#544e4e",
-  steel: "#4a5b75",
-  water: "#3a9eff",
-};
+function getTypeBgClass(type) {
+  return `type-bg-${type}`;
+}
 
+function getPokemonBgColor(pokemon) {
+  return getTypeBgClass(pokemon.types[0]);
+}
+
+
+// State für aktuelle Evo-Position pro Overlay
+const evoChainState = { };
 
 function getTypeIconURL(type) {
   return `assets/img/types/${type}.png`;
@@ -104,12 +94,6 @@ function renderOverlayCards() {
   for (let i = 0; i < allPokemons.length; i++) {
     OverlayCard.innerHTML += renderOverlayMain(i);
   }
-}
-
-
-function getPokemonBgColor(pokemon) {
-  const mainType = pokemon.types[0];
-  return typeColors[mainType] || "#DDD";
 }
 
 
@@ -219,7 +203,6 @@ async function fetchFullPokemonDetails(pokemonResults) {
 function getStatBar(statName, statValue) {
   const maxStat = 150; 
   const percentage = Math.min((statValue / maxStat) * 100, 100);
-  // Farbe bestimmen: unter 50% rot, sonst grün
   const color = percentage < 50 ? "#e74c3c" : "#27ae60";
   return getStatBarTemplate(statName, percentage, color);
 }
@@ -271,21 +254,28 @@ async function fetchPokemonImage(name) {
 }
 
 
-function renderEvoChain(container, evoChain) {
+function renderEvoChain(container, evoChain, i) {
   if (!evoChain.length) {
     container.innerHTML = `<p>Evolution data not available</p>`;
     return;
   }
 
-  let html = evoChain
-    .map((stage, index) => {
-      const arrow =
-        index < evoChain.length - 1 ? `<span class="arrow">➜</span>` : "";
-      return getEvoChainTemplateInfo(stage, arrow);
-    })
-    .join("");
-
-  container.innerHTML = html;
+  // Responsive: Bei <=410px nur ein Pokémon + Buttons anzeigen
+  if (window.matchMedia("(max-width: 410px)").matches) {
+    if (evoChainState[i] === undefined) evoChainState[i] = 0;
+    container.innerHTML = getEvoChainWithNavTemplate(evoChain, evoChainState[i], i);
+  } else {
+    let html = evoChain
+      .map((stage, index) => {
+        const arrow =
+          index < evoChain.length - 1 ? `<span class="arrow">➜</span>` : "";
+        return getEvoChainTemplateInfo(stage, arrow);
+      })
+      .join("");
+    container.innerHTML = html;
+  }
+  // Speichere die EvoChain für Navigation
+  container._evoChain = evoChain;
 }
 
 
@@ -335,7 +325,8 @@ async function loadAndRenderEvoChain(i) {
   const pokemon = allPokemons[i];
   const container = document.getElementById(`evo-chain-info-${i}`);
   const evoChain = await getEvolutionChain(pokemon.name);
-  renderEvoChain(container, evoChain);
+  evoChainState[i] = 0; // State zurücksetzen
+  renderEvoChain(container, evoChain, i);
 }
 
 
@@ -414,12 +405,12 @@ function arrowLeft(i, section = null) {
 function switchCardOverlay(i, section = null) {
   let overlayRef = document.getElementById("overlay");
   overlayRef.innerHTML = "";
-  // Standard: main, aber wenn section gesetzt, dann entsprechende Section laden
+ 
   if (section === "stats") {
     overlayRef.innerHTML = renderOverlayStats(i);
   } else if (section === "evo_chain") {
     overlayRef.innerHTML = renderOverlayEvoChain(i);
-    // Lade die Evolutionskette asynchron
+  
     setTimeout(() => loadAndRenderEvoChain(i), 0);
   } else {
     overlayRef.innerHTML = renderOverlayMain(i);
@@ -448,3 +439,52 @@ function renderNewCards(pokemonList) {
     overlay.innerHTML += renderOverlayMain(i);
   });
 }
+
+
+function showPrevEvo(i) {
+  const container = document.getElementById(`evo-chain-info-${i}`);
+  const evoChain = container._evoChain;
+  if (!evoChain) return;
+  if (evoChainState[i] > 0) {
+    evoChainState[i]--;
+    container.innerHTML = getEvoChainWithNavTemplate(evoChain, evoChainState[i], i);
+  }
+}
+
+function showNextEvo(i) {
+  const container = document.getElementById(`evo-chain-info-${i}`);
+  const evoChain = container._evoChain;
+  if (!evoChain) return;
+  if (evoChainState[i] < evoChain.length - 1) {
+    evoChainState[i]++;
+    container.innerHTML = getEvoChainWithNavTemplate(evoChain, evoChainState[i], i);
+  }
+}
+
+
+window.addEventListener('resize', handleEvoChainResize);
+
+function handleEvoChainResize() {
+    document.querySelectorAll('.Evo-Chain-infos').forEach(container => {
+        const match = container.id && container.id.match(/^evo-chain-info-(\d+)$/);
+        if (!match) return;
+        const i = Number(match[1]);
+        const evoChain = container._evoChain;
+        if (!evoChain) return;
+        if (window.matchMedia("(max-width: 410px)").matches) {
+            if (window.evoChainState && window.evoChainState[i] === undefined) window.evoChainState[i] = 0;
+            container.innerHTML = getEvoChainWithNavTemplate(evoChain, window.evoChainState ? window.evoChainState[i] : 0, i);
+        } else {
+            let html = evoChain
+                .map((stage, index) => {
+                    const arrow =
+                        index < evoChain.length - 1 ? `<span class="arrow">➜</span>` : "";
+                    return getEvoChainTemplateInfo(stage, arrow);
+                })
+                .join("");
+            container.innerHTML = html;
+        }
+    });
+}
+
+

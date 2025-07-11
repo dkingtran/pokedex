@@ -89,7 +89,7 @@ input::placeholder {
     justify-content: center;
     align-items: center;
     color: rgb(240, 240, 240);
-    font-size: 20px;
+    font-size: 16px;
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -157,3 +157,22 @@ input::placeholder {
     color: hsl(0, 0%, 100%); 
     transform: scale(1.3);
 }
+
+.type-bg-bug { background-color: #b7e75d !important; }
+.type-bg-dark { background-color: #3f3127 !important; }
+.type-bg-dragon { background-color: #636EBF !important; }
+.type-bg-electric { background-color: #f7bf12 !important; }
+.type-bg-fairy { background-color: #d37eff !important; }
+.type-bg-fighting { background-color: #bb3b25 !important; }
+.type-bg-fire { background-color: #ff4700 !important; }
+.type-bg-flying { background-color: #8ac7f5 !important; }
+.type-bg-ghost { background-color: #f5e9ff !important; }
+.type-bg-grass { background-color: #68b354 !important; }
+.type-bg-ground { background-color: #7a6245 !important; }
+.type-bg-ice { background-color: #6dc0fa !important; }
+.type-bg-normal { background-color: #a3a3a3 !important; }
+.type-bg-poison { background-color: #0bb9a0 !important; }
+.type-bg-psychic { background-color: #bf41ff !important; }
+.type-bg-rock { background-color: #544e4e !important; }
+.type-bg-steel { background-color: #4a5b75 !important; }
+.type-bg-water { background-color: #3a9eff !important; }

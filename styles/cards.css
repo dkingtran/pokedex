@@ -68,6 +68,9 @@
     font-size: 1.5rem;
 }
 
+.evo-pokemon-name {
+    font-size: 1.2rem;
+}
 
 .pokemon-img {
     max-height: 160px !important;
