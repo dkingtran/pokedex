@@ -90,6 +90,20 @@
     .pokemon-img {
         height: 120px;
     }
+
+    .type-switch-row {
+        min-height: 36px;
+    }
+
+    .switch-button.switch-left,
+    .switch-button.switch-right {
+        min-width: 28px;
+        height: 28px;
+    }
+
+    .type-icons-center {
+        gap: 2px;
+    }
 }
 
 
@@ -122,6 +136,10 @@
 
     .main-infos {
         margin-top: 16px !important;   
+    }
+
+    .main-infos-span {
+        font-size: 1.1rem !important;
     }
 
 
@@ -267,5 +285,18 @@
         font-size: 0.7rem;
     }
 
+    .type-switch-row {
+        min-height: 28px;
+    }
 
+    .switch-button.switch-left,
+    .switch-button.switch-right {
+        min-width: 22px;
+        height: 22px;
+        font-size: 1rem;
+    }
+
+    .type-icons-center {
+        gap: 1px;
+    }
 }

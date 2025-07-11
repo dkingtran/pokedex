@@ -51,7 +51,7 @@ body {
 
 input {
     padding: 5px 15px;
-    font-size: 14px;
+    font-size: 2rem;
     border: 2px solid hsl(0, 100%, 61%);
     border-radius: 8px;
     background-color: hsla(0, 0%, 100%, 0.836);
@@ -118,6 +118,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
+    gap: 16px;
 }
 
 .logo:hover {
@@ -154,5 +155,5 @@ input::placeholder {
 
 .switch-button:hover {
     color: hsl(0, 0%, 100%); 
-    transform: scale(1.05);
+    transform: scale(1.3);
 }

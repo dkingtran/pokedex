@@ -35,10 +35,10 @@ function getOverlayTemplate(i, pokemon, bgColor, typeIconsHTML) {
                           <img class="pokemon-img" src="${pokemon.sprite}" alt="${pokemon.name}" id="pokemon_sprite">
                       </div>                
                   </div>
-                  <div class="type-section card-footer-overlay">
-                      <button class="switch-button" onclick="arrowLeft(${i})">&#10094;</button>
-                      ${typeIconsHTML} 
-                      <button class="switch-button" onclick="arrowRight(${i})">&#10095;</button> 
+                  <div class="type-section card-footer-overlay type-switch-row">
+                      <button class="switch-button switch-left" onclick="arrowLeft(${i}, 'main')">&#10094;</button>
+                      <div class="type-icons-center">${typeIconsHTML}</div>
+                      <button class="switch-button switch-right" onclick="arrowRight(${i}, 'main')">&#10095;</button> 
                   </div>
               </main>
               <footer class="overlay-template-footer">
@@ -85,10 +85,10 @@ function getOverlayStatsTemplate(i, pokemon, bgColor, typeIconsHTML, statBarsHTM
                       <img class="pokemon-img" src="${pokemon.sprite}" alt="${pokemon.name}" id="pokemon_sprite">
                   </div>                
               </div>
-              <div class="type-section card-footer-overlay">
-                  <button class="switch-button" onclick="arrowLeft(${i})">&#10094;</button>
-                  ${typeIconsHTML} 
-                  <button class="switch-button" onclick="arrowRight(${i})">&#10095;</button>  
+              <div class="type-section card-footer-overlay type-switch-row">
+                  <button class="switch-button switch-left" onclick="arrowLeft(${i}, 'stats')">&#10094;</button>
+                  <div class="type-icons-center">${typeIconsHTML}</div>
+                  <button class="switch-button switch-right" onclick="arrowRight(${i}, 'stats')">&#10095;</button>  
               </div>
           </main>
           <footer class="overlay-template-footer">
@@ -128,10 +128,10 @@ function getOverlayEvoChainTemplate(i, pokemon, bgColor, typeIconsHTML) {
                       <img class="pokemon-img" src="${pokemon.sprite}" alt="${pokemon.name}" id="pokemon_sprite">
                   </div>                
               </div>
-              <div class="type-section card-footer-overlay">
-                  <button class="switch-button" onclick="arrowLeft(${i})">&#10094;</button>
-                  ${typeIconsHTML} 
-                  <button class="switch-button" onclick="arrowRight(${i})">&#10095;</button>  
+              <div class="type-section card-footer-overlay type-switch-row">
+                  <button class="switch-button switch-left" onclick="arrowLeft(${i}, 'evo_chain')">&#10094;</button>
+                  <div class="type-icons-center">${typeIconsHTML}</div>
+                  <button class="switch-button switch-right" onclick="arrowRight(${i}, 'evo_chain')">&#10095;</button>  
               </div>
           </main>
           <footer class="overlay-template-footer evo-chain-footer">
@@ -152,12 +152,12 @@ function getOverlayEvoChainTemplate(i, pokemon, bgColor, typeIconsHTML) {
 }
 
 
-function getStatBarTemplate(statName, percentage){
+function getStatBarTemplate(statName, percentage, color){
   return `
       <div class="stat-bar-row">
           <span class="stat-label">${statName}</span>
           <div class="stat-bar-bg">
-              <div class="stat-bar-fill" style="width: ${percentage}%;"></div>
+              <div class="stat-bar-fill" style="width: ${percentage}%; background-color: ${color};"></div>
           </div>
       </div>
   `;
@@ -172,3 +172,4 @@ return `
           ${arrow}
       `;
 }
+

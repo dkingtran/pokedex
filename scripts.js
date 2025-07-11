@@ -3,25 +3,26 @@ let offset = 0;
 const limit = 20;
 
 const typeColors = {
-  normal: "#a3a3a3",  
-  fire: "#ff4700",     
-  water: "#3a9eff",       
-  electric: "#f7bf12",  
-  grass: "#68b354",       
-  ice: "#6dc0fa",         
+  bug: "#b7e75d",
+  dark: "#3f3127",
+  dragon: "#636EBF",
+  electric: "#f7bf12",
+  fairy: "#d37eff",
   fighting: "#bb3b25",
-  poison: "#0bb9a0",     
-  ground: "#7a6245",  
-  flying: "#8ac7f5",   
-  psychic: "#bf41ff",  
-  bug: "#b7e75d",         
-  rock: "#544e4e",        
-  ghost: "#f5e9ff",     
-  dragon: "#636EBF",  
-  dark: "#3f3127",     
-  steel: "#4a5b75",    
-  fairy: "#d37eff",    
+  fire: "#ff4700",
+  flying: "#8ac7f5",
+  ghost: "#f5e9ff",
+  grass: "#68b354",
+  ground: "#7a6245",
+  ice: "#6dc0fa",
+  normal: "#a3a3a3",
+  poison: "#0bb9a0",
+  psychic: "#bf41ff",
+  rock: "#544e4e",
+  steel: "#4a5b75",
+  water: "#3a9eff",
 };
+
 
 function getTypeIconURL(type) {
   return `assets/img/types/${type}.png`;
@@ -216,8 +217,11 @@ async function fetchFullPokemonDetails(pokemonResults) {
 
 
 function getStatBar(statName, statValue) {
-  const percentage = Math.min(statValue, 100);
-  return getStatBarTemplate(statName, percentage);
+  const maxStat = 150; 
+  const percentage = Math.min((statValue / maxStat) * 100, 100);
+  // Farbe bestimmen: unter 50% rot, sonst grün
+  const color = percentage < 50 ? "#e74c3c" : "#27ae60";
+  return getStatBarTemplate(statName, percentage, color);
 }
 
 
@@ -295,7 +299,10 @@ function overlay(i) {
   overlayRef.innerHTML = "";
   overlayRef.innerHTML += renderOverlayMain(i);
   overlayRef.classList.toggle("d_none");
+
+  document.body.classList.add("no-scroll");
 }
+
 
 
 function dialogPrevention(event) {
@@ -306,7 +313,10 @@ function dialogPrevention(event) {
 function toggleOff() {
   let overlayRef = document.getElementById("overlay");
   overlayRef.classList.toggle("d_none");
+
+  document.body.classList.remove("no-scroll");
 }
+
 
 
 async function loadAndRenderMain(i) {
@@ -381,31 +391,39 @@ function toggleOverlaySpinner(show) {
 }
 
 
-function arrowRight(i) {
+function arrowRight(i, section = null) {
   if (i < allPokemons.length - 1) {
     i++;
   } else {
     i = 0;
   }
-  switchCardOverlay(i);
+  switchCardOverlay(i, section);
 }
 
 
-function arrowLeft(i) {
+function arrowLeft(i, section = null) {
   if (i > 0) {
     i--;
   } else {
     i = allPokemons.length - 1;
   }
-  switchCardOverlay(i);
+  switchCardOverlay(i, section);
 }
 
 
-function switchCardOverlay(i) {
+function switchCardOverlay(i, section = null) {
   let overlayRef = document.getElementById("overlay");
-
   overlayRef.innerHTML = "";
-  overlayRef.innerHTML = renderOverlayMain(i);
+  // Standard: main, aber wenn section gesetzt, dann entsprechende Section laden
+  if (section === "stats") {
+    overlayRef.innerHTML = renderOverlayStats(i);
+  } else if (section === "evo_chain") {
+    overlayRef.innerHTML = renderOverlayEvoChain(i);
+    // Lade die Evolutionskette asynchron
+    setTimeout(() => loadAndRenderEvoChain(i), 0);
+  } else {
+    overlayRef.innerHTML = renderOverlayMain(i);
+  }
 }
 
 

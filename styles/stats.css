@@ -50,7 +50,7 @@
 }
 
 .stat-bar-fill {
-    background-color: hsl(0, 0%, 30%);
+    /* Hintergrundfarbe wird inline gesetzt */
     height: 100%;
     transition: width 0.3s ease-in-out;
 }
