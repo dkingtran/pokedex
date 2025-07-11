@@ -40,25 +40,19 @@ function debounce(func, delay) {
 
 function filterAndShowNames() {
   const searchValue = getSearchInput();
-  if (searchValue.length < 3) {
-    renderCards();
-    return;
-  }
   const content = document.getElementById("content");
+  if (searchValue.length < 3) return renderCards();
   content.innerHTML = "";
-
   const filtered = filterPokemonsByName(searchValue);
-  if (filtered.length === 0) {
-    content.innerHTML = '<p class="not-found-alert" id="not-found-msg">No Pokémon found.</p>';
-
-    setTimeout(() => {
-      const msg = document.getElementById('not-found-msg');
-      if (msg) msg.remove(); 
-    }, 4000);
-    return;
-  }
-  renderFilteredPokemons(filtered, content);
-  renderCards();
+  filtered.length === 0
+    ? (
+        content.innerHTML = '<p class="not-found-alert" id="not-found-msg">No Pokémon found.</p>',
+        setTimeout(() => {
+          const msg = document.getElementById('not-found-msg');
+          if (msg) msg.remove();
+        }, 4000)
+      )
+    : (renderFilteredPokemons(filtered, content), renderCards());
 }
 
 
@@ -259,22 +253,13 @@ function renderEvoChain(container, evoChain, i) {
     container.innerHTML = `<p>Evolution data not available</p>`;
     return;
   }
-
-  // Responsive: Bei <=410px nur ein Pokémon + Buttons anzeigen
-  if (window.matchMedia("(max-width: 410px)").matches) {
-    if (evoChainState[i] === undefined) evoChainState[i] = 0;
-    container.innerHTML = getEvoChainWithNavTemplate(evoChain, evoChainState[i], i);
-  } else {
-    let html = evoChain
-      .map((stage, index) => {
-        const arrow =
-          index < evoChain.length - 1 ? `<span class="arrow">➜</span>` : "";
-        return getEvoChainTemplateInfo(stage, arrow);
-      })
-      .join("");
-    container.innerHTML = html;
-  }
-  // Speichere die EvoChain für Navigation
+  container.innerHTML = window.matchMedia("(max-width: 410px)").matches
+    ? (evoChainState[i] === undefined && (evoChainState[i] = 0), getEvoChainWithNavTemplate(evoChain, evoChainState[i], i))
+    : evoChain
+        .map((stage, index) =>
+          getEvoChainTemplateInfo(stage, index < evoChain.length - 1 ? `<span class="arrow">➜</span>` : "")
+        )
+        .join("");
   container._evoChain = evoChain;
 }
 
